@@ -1,0 +1,16 @@
+<div class="container wrapper">
+    <form class="search" [formGroup]="searchForm">
+        <div class="row align-items-center">
+            <div class="col-9">
+                <input type="text" class="form-control" placeholder="Dolly Parton" formControlName="search">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary" (click)="submit()">Search</button>
+            </div>  
+        </div>
+    </form>
+
+    <div>
+        <p>Output: {{searchForm.controls.search.value}}</p>
+    </div>
+</div>
