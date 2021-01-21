@@ -2,7 +2,7 @@
     <form class="search" [formGroup]="searchForm">
         <div class="row align-items-center">
             <div class="col-9">
-                <input type="text" class="form-control" placeholder="Dolly Parton" formControlName="search">
+                <input type="text" class="form-control" placeholder="Enter song title or artist name..." formControlName="search">
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary" (click)="submit()">Search</button>
@@ -10,7 +10,18 @@
         </div>
     </form>
 
-    <div>
-        <p>Output: {{searchForm.controls.search.value}}</p>
+    <div class="row">
+        <div class="col">
+            <h2>Artists</h2>
+            <div *ngFor="let artist of artistOutput; let i = index">
+                <p>{{artist.name}}</p>
+            </div>
+        </div>
+        <div class="col">
+            <h2>Tracks</h2>
+            <div *ngFor="let tracks of trackOutput; let i = index">
+                <p>{{tracks.name}}</p>
+            </div>
+        </div>
     </div>
 </div>
