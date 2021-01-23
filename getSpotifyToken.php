@@ -2,9 +2,8 @@
 
 /* Spotify Application Client ID and Secret Key */
 
-// !!! Make sure to keep these secret !!!
-$client_id     = 'aa050857df1b4347bf4e966f4154dba8'; 
-$client_secret = 'a5e045c7cab346588913fc51608f5c50';
+$client_id     = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; 
+$client_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
 /* Get Spotify Authorization Token */
 
