@@ -1,27 +1,62 @@
 # SpotifyApiExercise
+This application utilizes the Spotify Developer API to query information about a song, artist, or album. The intent of this project is to provide a working example of a REST API utilizing Angular 8 and PHP 7. A simple PHP script is used to request an access token by encoding the [developers public and privtate key](https://developer.spotify.com/dashboard/applications) and posting it to the provided api token url. Once the token is obtained, it is returned to the front-end which can now query the necessary data via https POST services. The front-end also controls a timeout script to renew the token every 3600s which prevents the token from expiring and the user experiencing errors. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
 
-## Development server
+The user is able to search for a song title or artist with an HTML form.
+Example Output:
+This sample demonstrates:
+* Artist Results
+  * Image
+  * Name
+  * Genre
+  * Top track list
+    * Name
+    * Image
+    * Ablum type (full or single)
+    * Release date
+    * Spotify link
+  * Artist album list
+    * Popularity
+    * Mame
+    * Image
+    * Album name
+    * Duration
+    * Spotify link
+    * Preview link
+* Song Results
+  * Popularity
+  * Name
+  * Image
+  * Artist
+  * Album
+  * Album release date
+  * Duration
+  * Spotify link
+  * Preview link
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Build
+
+Run `npm install` to install all necessary node modules.
+
+Run `npm build-dev` to build the project and watch for changes. The build artifacts will be stored in the `/dist/spotify-api-exercise` direcotry and is now available to serve on your localhost at `http://localhost/spotify-api-exercise/dist/spotify-api-exercise`.
+
+Run `ng build --prod` for a prodction build. The build artifacts will also be stored in the `/dist/spotify-api-exercise` directory.
 
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## ~~Running unit tests~~
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+~~Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).~~
 
-## Running unit tests
+## ~~Running end-to-end tests~~
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+~~Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).~~
 
-## Running end-to-end tests
+## Built With
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* [Angular 8.3.5](https://angular.io/)
+* [PHP 7.3.11](https://www.php.net/)
+* [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
