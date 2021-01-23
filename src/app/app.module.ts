@@ -6,11 +6,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
+import { ArtistsComponent } from './search/artists/artists.component';
+import { TracksComponent } from './search/tracks/tracks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    ArtistsComponent,
+    TracksComponent
   ],
   imports: [
     BrowserModule,

@@ -17,15 +17,17 @@ export class SearchComponent implements OnInit {
 
   constructor(public searchService: SearchService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  submit() {
+    //console.log(this.searchForm.controls.search.value);
+    // Get Token
     this.searchService.getAuth().subscribe((res) => {
       console.log(res);
       this.token = res.toString();
     });
-  }
 
-  submit() {
-    //console.log(this.searchForm.controls.search.value);
+    // Get Results
     this.searchService.searchTrackArtist(this.searchForm.controls.search.value,  this.token).subscribe((res) => {
       console.log(res);
       const output = res;

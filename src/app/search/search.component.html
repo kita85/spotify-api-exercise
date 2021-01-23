@@ -1,27 +1,79 @@
 <div class="container wrapper">
-    <form class="search" [formGroup]="searchForm">
-        <div class="row align-items-center">
-            <div class="col-9">
-                <input type="text" class="form-control" placeholder="Enter song title or artist name..." formControlName="search">
+    <div [class.active]="artistOutput || trackOutput" class="searchMusic">
+        <h1 (click)="artistOutput = null; trackOutput = null">Search your favorite music</h1>
+        <p>Utilizes the Spotify API.</p>
+        <form [formGroup]="searchForm">
+            <div class="row align-items-center">
+                <div class="col-9">
+                    <input type="text" class="form-control" placeholder="Enter song title or artist name..." formControlName="search">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary" (click)="submit()">Search</button>
+                </div>  
             </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary" (click)="submit()">Search</button>
-            </div>  
-        </div>
-    </form>
-
-    <div class="row">
-        <div class="col">
-            <h2>Artists</h2>
-            <div *ngFor="let artist of artistOutput; let i = index">
-                <p>{{artist.name}}</p>
-            </div>
-        </div>
-        <div class="col">
-            <h2>Tracks</h2>
-            <div *ngFor="let tracks of trackOutput; let i = index">
-                <p>{{tracks.name}}</p>
+        </form>
+    </div>
+    <div class="spacer"></div>
+    <div [class.active]="artistOutput" class="searchResults">
+        <h6>Artists</h6>
+        <!--<p>On click, route to new "Album" page. Album page show ablum info.</p>-->
+        <div id="artists" class="">
+            <div class="artists-scroll">
+                <div *ngFor="let artist of artistOutput; let i = index" class="card">
+                    <img *ngIf="artist.images[2]" [src]="artist.images[2].url" height="160" width="160">
+                    <img *ngIf="!artist.images[2]" src="https://placehold.it/160x160" height="160" width="160">
+                    <!--<p>#{{artist.popularity}}</p>-->
+                    <p>{{artist.name}}</p>
+                    <span *ngFor="let genre of artist.genres | slice:0:1 ; let i=index" class="genre small">{{genre}}</span>
+                    <span *ngIf="artist.genres.length == 0" class="genre small">none</span>
+                    <br>
+                    <a target="_blank" [href]="artist.external_urls.spotify"><button class="btn btn-secondary">View on Spotify</button></a>
+                </div>
             </div>
         </div>
     </div>
+    <br><br>
+    <div [class.active]="trackOutput" class="searchResults">
+        <h6>Songs</h6>
+       <!--<p>On click, show track player. Display some album info.</p>-->
+        <div id="tracks">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Album</th>
+                        <th>Duration</th>
+                        <th>Listen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tracks of trackOutput; let i = index">
+                        <td>{{tracks.popularity}}</td>
+                        <td>
+                            <div class=""></div>
+                            <img *ngIf="tracks.album.images[0]" [src]="tracks.album.images[0].url" height="50" width="50">
+                            <img *ngIf="!tracks.album.images[0]" src="https://placehold.it/160x160" height="50" width="50">
+                            <span>{{tracks.name}}</span><br>
+                            <span class="small">{{tracks.artists[0].name}}</span>
+                            
+                        </td>
+                        <td>{{tracks.album.name}}<br><span class="small">{{tracks.album.release_date}}</span></td>
+                        <td>{{ ((tracks.duration_ms / 1000) / 60) | number : '1.2-2'}}</td>
+                        <td>
+                            <a target="_blank" [href]="tracks.external_urls.spotify"><i class="fa fa-spotify"></i></a> 
+                            <a target="_blank" [href]="tracks.preview_url"><i class="fa fa-play-circle"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h6>ToDo</h6>
+    <ul>
+        <li>Php refactor</li>
+        <li>Album Click</li>
+        <li>ReadMe</li>
+    </ul>
 </div>
