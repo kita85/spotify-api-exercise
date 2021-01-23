@@ -11,28 +11,71 @@ export class SearchComponent implements OnInit {
   token: string;
   artistOutput: object;
   trackOutput: object;
+  artistTrackOutput: object;
+  artistAlbumOutput: object;
+
   searchForm = new FormGroup({
     search: new FormControl('')
   });
 
   constructor(public searchService: SearchService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.searchService.getAuth().subscribe((res) => {
+      this.token = res.toString();
+      console.log(this.token);
+    });
+  }
+
+  setAuth():void {
+    // Get Token
+    this.searchService.getAuth().subscribe((res) => {
+      this.token = res.toString();
+      console.log(this.token);
+    });
+  }
 
   submit() {
     //console.log(this.searchForm.controls.search.value);
-    // Get Token
+
+    // Set New Token
+    //this.setAuth();
+
     this.searchService.getAuth().subscribe((res) => {
-      console.log(res);
       this.token = res.toString();
+      console.log(this.token);
     });
 
     // Get Results
     this.searchService.searchTrackArtist(this.searchForm.controls.search.value,  this.token).subscribe((res) => {
       console.log(res);
-      const output = res;
-      this.artistOutput = output['artists']['items'];
-      this.trackOutput = output['tracks']['items'];
+
+      this.artistOutput = res['artists']['items'];
+      this.trackOutput = res['tracks']['items'];
     });
+  }
+
+  searchArtistAlbumsTracks(artistId:string) {
+    // Set New Token
+    //this.setAuth();
+
+    // Get Album Results
+    this.searchService.searchArtistAlbums(artistId,  this.token).subscribe((res) => {
+      this.artistAlbumOutput = res['items'];
+      console.log('searchArtistAlbums');
+      console.log(this.artistAlbumOutput);
+    });
+
+    // Get Track Results
+    this.searchService.searchArtistTracks(artistId,  this.token).subscribe((res) => {
+      this.artistTrackOutput = res['tracks'];
+      console.log('searchArtistTracks');
+      console.log(this.artistTrackOutput);
+    });
+  }
+
+  close():void {
+    this.artistTrackOutput = null;
+    this.artistAlbumOutput = null;
   }
 }

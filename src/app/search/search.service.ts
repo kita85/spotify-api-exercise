@@ -29,4 +29,22 @@ export class SearchService {
     return this.http.get(this.searchUrl, { headers: headers });
   }
 
+  // Get search results for a query
+  searchArtistAlbums(artistId: string, authToken: string) {
+    const headers= new HttpHeaders()
+    .set('Authorization', 'Bearer ' + authToken);
+
+    this.searchUrl = 'https://api.spotify.com/v1/artists/'+artistId+'/albums?include_groups=single%2Cappears_on&market=US&limit=10&offset=5';
+    return this.http.get(this.searchUrl, { headers: headers });
+  }
+
+  // Get search results for a query
+  searchArtistTracks(artistId: string, authToken: string) {
+    const headers= new HttpHeaders()
+    .set('Authorization', 'Bearer ' + authToken);
+
+    this.searchUrl = 'https://api.spotify.com/v1/artists/'+artistId+'/top-tracks?market=US';
+    return this.http.get(this.searchUrl, { headers: headers });
+  }
+
 }

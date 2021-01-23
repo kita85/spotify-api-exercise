@@ -16,8 +16,8 @@
     <div class="spacer"></div>
     <div [class.active]="artistOutput" class="searchResults">
         <h6>Artists</h6>
-        <!--<p>On click, route to new "Album" page. Album page show ablum info.</p>-->
-        <div id="artists" class="">
+        <p *ngIf="!artistOutput">0 Results</p>
+        <div id="artists" *ngIf="artistOutput">
             <div class="artists-scroll">
                 <div *ngFor="let artist of artistOutput; let i = index" class="card">
                     <img *ngIf="artist.images[2]" [src]="artist.images[2].url" height="160" width="160">
@@ -27,7 +27,7 @@
                     <span *ngFor="let genre of artist.genres | slice:0:1 ; let i=index" class="genre small">{{genre}}</span>
                     <span *ngIf="artist.genres.length == 0" class="genre small">none</span>
                     <br>
-                    <a target="_blank" [href]="artist.external_urls.spotify"><button class="btn btn-secondary">View on Spotify</button></a>
+                    <button class="btn btn-secondary" (click)="searchArtistAlbumsTracks(artist.id)">More by this artist</button>
                 </div>
             </div>
         </div>
@@ -35,8 +35,8 @@
     <br><br>
     <div [class.active]="trackOutput" class="searchResults">
         <h6>Songs</h6>
-       <!--<p>On click, show track player. Display some album info.</p>-->
-        <div id="tracks">
+        <p *ngIf="!trackOutput">0 Results</p>
+        <div id="tracks" *ngIf="trackOutput">
             <table class="table table-dark table-hover">
                 <thead>
                     <tr>
@@ -51,9 +51,8 @@
                     <tr *ngFor="let tracks of trackOutput; let i = index">
                         <td>{{tracks.popularity}}</td>
                         <td>
-                            <div class=""></div>
                             <img *ngIf="tracks.album.images[0]" [src]="tracks.album.images[0].url" height="50" width="50">
-                            <img *ngIf="!tracks.album.images[0]" src="https://placehold.it/160x160" height="50" width="50">
+                            <img *ngIf="!tracks.album.images[0]" src="https://placehold.it/50x50" height="50" width="50">
                             <span>{{tracks.name}}</span><br>
                             <span class="small">{{tracks.artists[0].name}}</span>
                             
@@ -61,8 +60,8 @@
                         <td>{{tracks.album.name}}<br><span class="small">{{tracks.album.release_date}}</span></td>
                         <td>{{ ((tracks.duration_ms / 1000) / 60) | number : '1.2-2'}}</td>
                         <td>
-                            <a target="_blank" [href]="tracks.external_urls.spotify"><i class="fa fa-spotify"></i></a> 
-                            <a target="_blank" [href]="tracks.preview_url"><i class="fa fa-play-circle"></i></a>
+                            <a *ngIf="tracks.external_urls.spotify" target="_blank" [href]="tracks.external_urls.spotify"><i class="fa fa-spotify"></i></a> 
+                            <a *ngIf="tracks.preview_url" target="_blank" [href]="tracks.preview_url"><i class="fa fa-play-circle"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -73,7 +72,79 @@
     <h6>ToDo</h6>
     <ul>
         <li>Php refactor</li>
-        <li>Album Click</li>
         <li>ReadMe</li>
+        <li>0 results</li>
+        <li>Dont scroll header</li>
     </ul>
 </div>
+
+
+<div [class.open]="artistTrackOutput" class="popup">
+        <h3>More by this artist</h3>
+        <span (click)="close()" class="close small"><i class="fa fa-times"></i></span>
+        <br>
+        <div class="content">
+            <h6>Tracks</h6>
+            <p *ngIf="!artistTrackOutput">0 Results</p>
+            <div id="artistTracks" *ngIf="artistTrackOutput">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Album</th>
+                                <th>Duration</th>
+                                <th>Listen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let track of artistTrackOutput; let i = index">
+                                <td>{{track.popularity}}</td>
+                                <td>
+                                    <img *ngIf="track.album.images[0]" [src]="track.album.images[0].url" height="50" width="50">
+                                    <img *ngIf="!track.album.images[0]" src="https://placehold.it/50x50" height="50" width="50">
+                                    <span>{{track.name}}</span><br>
+                                    
+                                </td>
+                                <td>{{track.album.name}}</td>
+                                <td>{{ ((track.duration_ms / 1000) / 60) | number : '1.2-2'}}</td>
+                                <td>
+                                    <a *ngIf="track.external_urls.spotify" target="_blank" [href]="track.external_urls.spotify"><i class="fa fa-spotify"></i></a> 
+                                    <a *ngIf="track.preview_url" target="_blank" [href]="track.preview_url"><i class="fa fa-play-circle"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <br><br>
+            <h6>Albums</h6>
+            <p *ngIf="!artistAlbumOutput">0 Results</p>
+            <div id="artistAlbums" *ngIf="artistAlbumOutput">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Release Date</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let album of artistAlbumOutput; let i = index">
+                                <td>
+                                    <img *ngIf="album.images[0]" [src]="album.images[0].url" height="50" width="50">
+                                    <img *ngIf="!album.images[0]" src="https://placehold.it/50x50" height="50" width="50">
+                                    <span>{{album.name}}</span>
+                                    
+                                </td>
+                                <td>{{album.album_type}}</td>
+                                <td>{{album.release_date}}</td>
+                                <td>
+                                    <a target="_blank" [href]="album.external_urls.spotify"><i class="fa fa-spotify"></i></a> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
