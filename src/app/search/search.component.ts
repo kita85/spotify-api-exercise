@@ -20,45 +20,33 @@ export class SearchComponent implements OnInit {
 
   constructor(public searchService: SearchService) { }
 
-  ngOnInit() {
-    this.searchService.getAuth().subscribe((res) => {
-      this.token = res.toString();
-      console.log(this.token);
-    });
+  ngOnInit():void {
+    this.setAuth();
   }
 
   setAuth():void {
     // Get Token
+    const self = this;
     this.searchService.getAuth().subscribe((res) => {
       this.token = res.toString();
-      console.log(this.token);
+
+      // Refresh token before it expires in 5 minutes
+      setTimeout(function(){ self.setAuth(); }, 4.5 * 60000); // 270000ms
     });
+
+    
   }
 
-  submit() {
-    //console.log(this.searchForm.controls.search.value);
-
-    // Set New Token
-    //this.setAuth();
-
-    this.searchService.getAuth().subscribe((res) => {
-      this.token = res.toString();
-      console.log(this.token);
-    });
-
-    // Get Results
+  submit():void {
+    // Get Search Results
     this.searchService.searchTrackArtist(this.searchForm.controls.search.value,  this.token).subscribe((res) => {
-      console.log(res);
-
       this.artistOutput = res['artists']['items'];
       this.trackOutput = res['tracks']['items'];
+      console.log(res);
     });
   }
 
-  searchArtistAlbumsTracks(artistId:string) {
-    // Set New Token
-    //this.setAuth();
-
+  searchArtistAlbumsTracks(artistId:string):void {
     // Get Album Results
     this.searchService.searchArtistAlbums(artistId,  this.token).subscribe((res) => {
       this.artistAlbumOutput = res['items'];

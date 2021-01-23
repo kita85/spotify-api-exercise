@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -9,10 +7,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class SearchService {
   private searchUrl: string;
-  private clientId: string = 'aa050857df1b4347bf4e966f4154dba8';
-  private clientSecret: string = 'a5e045c7cab346588913fc51608f5c50';
+  private market: string;
+  private offset: number;
+  private limit: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.market = 'US';
+    this.offset = 0;
+    this.limit = 10;
+   }
 
   // Get access token from Spotify to use API
   getAuth() {
@@ -24,7 +27,7 @@ export class SearchService {
     const headers= new HttpHeaders()
     .set('Authorization', 'Bearer ' + authToken);
 
-    this.searchUrl = 'https://api.spotify.com/v1/search?query=' + query + '&offset=0&limit=10&type=track%2Cartist&market=US';
+    this.searchUrl = 'https://api.spotify.com/v1/search?query=' + query + '&type=track%2Cartist&market='+this.market+'&offset='+this.offset+'&limit='+this.limit;
 
     return this.http.get(this.searchUrl, { headers: headers });
   }
@@ -34,7 +37,7 @@ export class SearchService {
     const headers= new HttpHeaders()
     .set('Authorization', 'Bearer ' + authToken);
 
-    this.searchUrl = 'https://api.spotify.com/v1/artists/'+artistId+'/albums?include_groups=single%2Cappears_on&market=US&limit=10&offset=5';
+    this.searchUrl = 'https://api.spotify.com/v1/artists/'+artistId+'/albums?include_groups=single%2Cappears_on&market='+this.market+'&offset='+this.offset+'&limit='+this.limit;
     return this.http.get(this.searchUrl, { headers: headers });
   }
 
@@ -43,7 +46,7 @@ export class SearchService {
     const headers= new HttpHeaders()
     .set('Authorization', 'Bearer ' + authToken);
 
-    this.searchUrl = 'https://api.spotify.com/v1/artists/'+artistId+'/top-tracks?market=US';
+    this.searchUrl = 'https://api.spotify.com/v1/artists/'+artistId+'/top-tracks?market='+this.market;
     return this.http.get(this.searchUrl, { headers: headers });
   }
 
