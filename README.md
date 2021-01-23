@@ -39,9 +39,14 @@ This sample demonstrates:
 
 Run `npm install` to install all necessary node modules.
 
-Run `npm build-dev` to build the project and watch for changes. The build artifacts will be stored in the `/dist/spotify-api-exercise` direcotry and is now available to serve on your localhost at `http://localhost/spotify-api-exercise/dist/spotify-api-exercise`.
+Run `npm build-dev` to build the project and watch for changes. The build artifacts will be stored in the `/dist/spotify-api-exercise` direcotry.
 
 Run `ng build --prod` for a prodction build. The build artifacts will also be stored in the `/dist/spotify-api-exercise` directory.
+
+ 
+You will need an Apache/PHP web server to serve the files. [Docker](https://www.docker.com/get-started) or [MAMP](https://www.mamp.info/en/downloads/) are both good options.
+
+
 
 ## Code scaffolding
 
