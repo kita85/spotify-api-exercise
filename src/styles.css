@@ -1,0 +1,24 @@
+body {
+    background: rgb(2,0,28);
+    background: linear-gradient(90deg, rgba(2,0,28,1) 0%, rgba(20,20,50,1) 27%, rgba(0,36,65,1) 100%);
+    color: white;
+    overflow-x: hidden;
+}
+h1,p {
+    color: white!important;
+}
+button.btn.btn-primary {
+    border-radius: 100px!important;
+    background-color: #1e3a65!important;
+    border: none!important;
+}
+button.btn.btn-secondary {
+    border-radius: 100px!important;
+    margin: 20px 0!important;
+    width: auto!important;
+    padding: 3px 15px!important;
+    background-color: #04031f!important;
+    border: 1px solid #798aa7!important;
+    color: #97a1b5!important;
+    font-size: 15px!important;
+}

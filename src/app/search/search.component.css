@@ -1,0 +1,131 @@
+.search {
+    margin: 10px;
+}
+input,
+input:focus {
+    padding: 5px 10px;
+    border-radius: 100px;
+    border: 1px solid #a7a7a7;
+    border: 1px solid #022340;
+    background-color: #022340;
+    color: white;
+}
+button {
+    width: 100%;
+}
+.artists-scroll {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.card {
+    display: inline-block;
+    text-align: center;
+    padding: 22px 10px;
+    margin: 10px;
+    width: 200px;
+    background-color: #03203e!important;
+}
+.card img {
+    margin-bottom: 10px;
+}
+.card p {
+    text-overflow: ellipsis;
+    max-width: 200px;
+    overflow: hidden;
+}
+table i {
+    margin: 0px 5px;
+    font-size: 25px;
+}
+table i.fa-spotify {
+    color: #28d45d;
+}
+.searchMusic {
+    position: absolute;
+    top: 30%;
+    transition: .5s all;
+}
+.searchMusic.active {
+    top: 20px;
+}
+.spacer {
+    height: 200px;
+    width: 100%;
+}
+.searchResults {
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s all;
+}
+.searchResults.active {
+    visibility: visible;
+    opacity: 1;
+}
+h6 {
+    color: #2e4c67;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1d2a3a;
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.table-dark {
+    color: #fff;
+    background-color: #03203e00!important;
+}
+button.btn.btn-secondary:hover {
+    background-color: #172c50!important;
+    border: 1px solid #2e4c6f!important;
+}
+table img {
+    float: left;
+    margin: 0 10px 0 0;
+}
+.small {
+    color: #77787d;
+}
+
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 10%;
+    width: 80%;
+    max-height: calc(100vh - 40px);
+    overflow: hidden;
+    background-color: #03021e;
+    background-color: #f3f5f7;
+    padding: 30px;
+    transition: .5s all;
+    border-radius: 5px;
+    transform: scale(0);
+}
+.popup .content {
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    height: calc(100vh - 155px);
+}
+.popup.open {
+    transform: scale(1);
+}
+.close {
+    position: absolute;
+    right: 30px;
+    top: 35px;
+    font-size: 15px;
+    cursor: pointer;
+}
+table th:last-child {
+    min-width: 87px;
+}
