@@ -16,7 +16,7 @@
     <div class="spacer"></div>
     <div [class.active]="artistOutput" class="searchResults">
         <h6>Artists</h6>
-        <p *ngIf="!artistOutput">0 Results</p>
+        <p *ngIf="artistOutput && artistOutput.length === 0">0 Results</p>
         <div id="artists" *ngIf="artistOutput">
             <div class="artists-scroll">
                 <div *ngFor="let artist of artistOutput; let i = index" class="card">
@@ -35,8 +35,8 @@
     <br><br>
     <div [class.active]="trackOutput" class="searchResults">
         <h6>Songs</h6>
-        <p *ngIf="!trackOutput">0 Results</p>
-        <div id="tracks" *ngIf="trackOutput">
+        <p *ngIf="trackOutput && trackOutput.length ===0">0 Results</p>
+        <div id="tracks" *ngIf="trackOutput && trackOutput.length > 0">
             <table class="table table-dark table-hover">
                 <thead>
                     <tr>
@@ -68,14 +68,6 @@
             </table>
         </div>
     </div>
-
-    <h6>ToDo</h6>
-    <ul>
-        <li>Php refactor</li>
-        <li>ReadMe</li>
-        <li>0 results</li>
-        <li>Dont scroll header</li>
-    </ul>
 </div>
 
 

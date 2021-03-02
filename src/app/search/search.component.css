@@ -14,7 +14,7 @@ button {
     width: 100%;
 }
 .artists-scroll {
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
@@ -67,20 +67,22 @@ h6 {
     text-transform: uppercase;
     font-size: 15px;
 }
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
 
 ::-webkit-scrollbar-track {
-    background: #1d2a3a;
+    background: transparent;
     border-radius: 100px;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa;
+    border-radius: 100px;
+  }
+  
 ::-webkit-scrollbar-thumb {
-    background: transparent;
-}
-
+      background: #172c50;
+  }
 .table-dark {
     color: #fff;
     background-color: #03203e00!important;
@@ -129,3 +131,5 @@ table img {
 table th:last-child {
     min-width: 87px;
 }
+
+
