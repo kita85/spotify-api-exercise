@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SearchService } from './search.service';
 
 @Component({
@@ -14,8 +14,9 @@ export class SearchComponent implements OnInit {
   artistTrackOutput: object;
   artistAlbumOutput: object;
 
+  // Create reactive form
   searchForm = new FormGroup({
-    search: new FormControl('')
+    search: new FormControl('', [Validators.required])
   });
 
   constructor(public searchService: SearchService) { }
@@ -25,43 +26,44 @@ export class SearchComponent implements OnInit {
   }
 
   setAuth():void {
-    // Get Token
-    const self = this;
+    const self = this; // quick scoping fix
+
+    // Subscribe to Auth Token
     this.searchService.getAuth().subscribe((res) => {
       this.token = res.toString();
 
       // Refresh token before it expires in 5 minutes
       setTimeout(function(){ self.setAuth(); }, 4.5 * 60000); // 270000ms
     });
-
-    
   }
 
   submit():void {
-    // Get Search Results
-    this.searchService.searchTrackArtist(this.searchForm.controls.search.value,  this.token).subscribe((res) => {
-      this.artistOutput = res['artists']['items'];
-      this.trackOutput = res['tracks']['items'];
-      console.log(res);
-    });
+    // Make sure form is valid before submitting
+    if(this.searchForm.valid) {
+      // Subscribe to Search Results
+      this.searchService.searchTrackArtist(this.searchForm.controls.search.value,  this.token).subscribe((res) => {
+        // Store the results
+        this.artistOutput = res['artists']['items'];
+        this.trackOutput = res['tracks']['items'];
+      });
+    }
   }
 
   searchArtistAlbumsTracks(artistId:string):void {
     // Get Album Results
     this.searchService.searchArtistAlbums(artistId,  this.token).subscribe((res) => {
+      // Store the results
       this.artistAlbumOutput = res['items'];
-      console.log('searchArtistAlbums');
-      console.log(this.artistAlbumOutput);
     });
 
     // Get Track Results
     this.searchService.searchArtistTracks(artistId,  this.token).subscribe((res) => {
+      // Store the results
       this.artistTrackOutput = res['tracks'];
-      console.log('searchArtistTracks');
-      console.log(this.artistTrackOutput);
     });
   }
 
+  // Close popup
   close():void {
     this.artistTrackOutput = null;
     this.artistAlbumOutput = null;

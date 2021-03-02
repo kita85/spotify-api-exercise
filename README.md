@@ -1,5 +1,5 @@
 # SpotifyApiExercise
-This application utilizes the Spotify Web API to query information about a song, artist, or album. The intent of this project is to provide a working example of a REST API utilizing Angular 8 and PHP 7. A simple PHP script is used to request an access token by encoding the developers public and privtate key and posting it to the provided api endpoint. Once the token is obtained, it is returned to the front-end which can now query the necessary data via https POST services and an HTML form. The front-end also controls a timeout script to renew the token every 3600s which prevents the token from expiring and the user experiencing errors. 
+This application utilizes the Spotify Web API to query information about a song, artist, or album. The intent of this project is to provide a working example of a REST API utilizing Angular 8 and PHP 7. A simple PHP script is used to request an access token by encoding the developers public and privtate key and posting it to the provided api endpoint. Once the token is obtained, it is returned to the front-end which can now query the necessary data via https GET services and an HTML form. The front-end also controls a timeout script to renew the token every 3600s which prevents the token from expiring and the user experiencing errors. 
 
 ![Screenshot](https://github.com/kita85/spotify-api-exercise/blob/develop/ss1.png?raw=true)
 
@@ -73,11 +73,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Running unit tests
 
-~~Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).~~
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).~~
 
 ## Running end-to-end tests
 
-~~Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).~~
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).~~
 
 ## Built With
 

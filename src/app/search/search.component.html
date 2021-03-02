@@ -5,10 +5,11 @@
         <form [formGroup]="searchForm">
             <div class="row align-items-center">
                 <div class="col-9">
-                    <input type="text" class="form-control" placeholder="Enter song title or artist name..." formControlName="search">
+                    <input type="text" class="form-control" placeholder="Enter song title or artist name..." formControlName="search" autofocus>
+                    <span class="input-error small" *ngIf="!searchForm.valid && searchForm.dirty">Input required</span>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary" (click)="submit()">Search</button>
+                    <button [disabled]="!searchForm.valid" type="submit" class="btn btn-primary" (click)="submit()">Search</button>
                 </div>  
             </div>
         </form>
