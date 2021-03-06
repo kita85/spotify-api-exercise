@@ -1,24 +1,155 @@
-body {
-    background: rgb(2,0,28);
-    background: linear-gradient(90deg, rgba(2,0,28,1) 0%, rgba(20,20,50,1) 27%, rgba(0,36,65,1) 100%);
+/*General*/
+h6 {
+    color: #2e4c67;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+button {
+    width: 100%;
+}
+button.btn:disabled {
+    color: #0f1a37!important;
+    background-color: #1f415f!important;
+}
+button.btn.btn-secondary:hover {
+    background-color: #172c50!important;
+    border: 1px solid #2e4c6f!important;
+}
+
+/*Scrollbar*/
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 100px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa;
+    border-radius: 100px;
+}
+::-webkit-scrollbar-thumb {
+    background: #172c50;
+}
+
+/*Form*/
+input,
+input:focus {
+    padding: 5px 10px;
+    border-radius: 100px;
+    border: 1px solid #a7a7a7;
+    border: 1px solid #022340;
+    background-color: #022340;
     color: white;
-    overflow-x: hidden;
 }
-h1,p {
-    color: white!important;
+.search {
+    margin: 10px;
 }
-button.btn.btn-primary {
-    border-radius: 100px!important;
-    background-color: #1e3a65!important;
-    border: none!important;
+.input-error {
+    margin-left: 10px;
+    position: absolute;
+    top: 45px;
 }
-button.btn.btn-secondary {
-    border-radius: 100px!important;
-    margin: 20px 0!important;
-    width: auto!important;
-    padding: 3px 15px!important;
-    background-color: #04031f!important;
-    border: 1px solid #798aa7!important;
-    color: #97a1b5!important;
-    font-size: 15px!important;
+.input-error span {
+    color: #a24a4a!important;
+}
+.input-error span:first-child {
+    display: block;
+}
+/*Table*/
+table i {
+    margin: 0px 5px;
+    font-size: 25px;
+}
+table i.fa-spotify {
+    color: #28d45d;
+}
+.table-dark {
+    color: #fff;
+    background-color: #03203e00!important;
+}
+table img {
+    float: left;
+    margin: 0 10px 0 0;
+}
+table th:last-child {
+    min-width: 87px;
+}
+
+/*Popup*/
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 10%;
+    width: 80%;
+    max-height: calc(100vh - 40px);
+    overflow: hidden;
+    background-color: #03021e;
+    background-color: #f3f5f7;
+    padding: 30px;
+    transition: .5s all;
+    border-radius: 5px;
+    transform: scale(0);
+}
+.popup .content {
+    overflow-y: scroll;
+    overflow-x: hidden; 
+    height: calc(100vh - 155px);
+}
+.popup.open {
+    transform: scale(1);
+}
+.close {
+    position: absolute;
+    right: 30px;
+    top: 35px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/*Artists*/
+.artists-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.card {
+    display: inline-block;
+    text-align: center;
+    padding: 22px 10px;
+    margin: 10px;
+    width: 200px;
+    background-color: #03203e!important;
+}
+.card img {
+    margin-bottom: 10px;
+}
+.card p {
+    text-overflow: ellipsis;
+    max-width: 200px;
+    overflow: hidden;
+}
+/*Music*/
+.searchMusic {
+    position: absolute;
+    top: 30%;
+    transition: .5s all;
+}
+.searchMusic.active {
+    top: 20px;
+}
+.searchResults {
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s all;
+}
+.searchResults.active {
+    visibility: visible;
+    opacity: 1;
+}
+.small {
+    color: #77787d;
+}
+.spacer {
+    height: 200px;
+    width: 100%;
 }
