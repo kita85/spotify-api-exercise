@@ -1,5 +1,11 @@
 <?php
 /* Get Spotify Authorization Token */
+/*
+   PHP is necessary to request the Auth Token
+   due to Spotify's CORS policy. This script
+   utilizes CURL to request the token and send
+   it back to the frontend.
+*/
 
     /* Spotify Application Client ID and Secret Key */
     $client_id     = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; 
@@ -26,7 +32,7 @@
         die();
     }
 
-/* Return toekn provided by api */
+/* Return token provided by api */
     // close curl session
     curl_close($ch); 
     $token = json_decode($result, true)['access_token'];
